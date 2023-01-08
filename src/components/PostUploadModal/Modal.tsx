@@ -108,8 +108,12 @@ const PostModal: React.FC = () => {
                 <Upload
                   {...props}
                   beforeUpload={(file) => {
+                    console.log("file", file);
+
                     const isJPG =
-                      file.type === "image/jpeg" || file.type === "image/png";
+                      file.type === "image/jpeg" ||
+                      file.type === "image/jpg" ||
+                      file.type === "image/png";
                     if (!isJPG) {
                       message.error("You can only upload JPG or PNG file!");
                       setImageUpload("");
