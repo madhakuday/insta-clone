@@ -15,8 +15,8 @@ const PostPageMain = () => {
     if (!pop_status) {
       localStorage.setItem("pop_status", "1");
       swal(
-        `Working on you ui and profile page. 
-       this is only test for version.
+        `Working on ui and profile page. 
+       this is only for testing purpose.
        Have a nice day 😊`
       );
     }
