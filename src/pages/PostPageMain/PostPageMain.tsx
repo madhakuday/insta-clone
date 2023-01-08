@@ -1,7 +1,14 @@
 import Posts from "../../components/Posts/Posts";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { getDocs, collection, onSnapshot, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  onSnapshot,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import BottomNavigation from "../../components/BootomNavigation/BottomNavigation";
 import { Alert } from "antd";
@@ -23,10 +30,10 @@ const PostPageMain = () => {
   }, []);
 
   useEffect(() => {
-    const postRef = collection(db, "post");
+    // const postRef = collection(db, "post");
+    const postRef = query(collection(db, "post"), orderBy("timeStamp", "asc"));
+
     const unsub = onSnapshot(postRef, (snapshot) => {
-      let a = snapshot.docs.map((doc) => doc.data());
-      console.log("Data", a);
       setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
     });
 

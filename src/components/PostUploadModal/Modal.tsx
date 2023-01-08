@@ -1,6 +1,7 @@
 import { db, storage } from "../../firebase";
 import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
+import { serverTimestamp } from "firebase/firestore";
 import {
   Button,
   Col,
@@ -19,6 +20,7 @@ import uuid from "react-uuid";
 
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
 
 const PostModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +58,9 @@ const PostModal: React.FC = () => {
               username: logdInUser?.nickname
                 ? logdInUser?.nickname
                 : logdInUser?.name,
+              timeStamp: serverTimestamp(),
             };
+            console.log("Upload Data", data);
             let a = await setDoc(doc(db, "post", uuid()), data);
             setIsModalOpen(false);
             message.success("Done");
@@ -98,7 +102,16 @@ const PostModal: React.FC = () => {
                 <Upload
                   {...props}
                   beforeUpload={(file) => {
-                    setImageUpload(file);
+                    const isJPG =
+                      file.type === "image/jpeg" || file.type === "image/png";
+                    console.log("isJPG", isJPG);
+                    if (!isJPG) {
+                      message.error("You can only upload JPG or PNG file!");
+                      return false;
+                    } else {
+                      setImageUpload(file);
+                      return true;
+                    }
                   }}
                 >
                   <Button icon={<UploadOutlined />}>Click to Upload</Button>

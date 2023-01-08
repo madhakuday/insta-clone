@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://www.mocky.io/v2/5cc8019d300000980a055e76/",
   "dependencies": {
     "@auth0/auth0-react": "^1.12.0",
     "@reduxjs/toolkit": "^1.9.1",
