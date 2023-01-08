@@ -31,7 +31,7 @@ const PostPageMain = () => {
 
   useEffect(() => {
     // const postRef = collection(db, "post");
-    const postRef = query(collection(db, "post"), orderBy("timeStamp", "asc"));
+    const postRef = query(collection(db, "post"), orderBy("timeStamp", "desc"));
 
     const unsub = onSnapshot(postRef, (snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
