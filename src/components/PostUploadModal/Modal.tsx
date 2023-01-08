@@ -25,6 +25,7 @@ import { FirebaseError } from "firebase/app";
 const PostModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUpload, setImageUpload] = useState<any>("");
+  const [isDisble, setIsDisble] = useState<boolean>(true);
 
   const [form] = Form.useForm();
   const logdInUser = useSelector((state: any) => state?.user?.user?.user);
@@ -68,7 +69,10 @@ const PostModal: React.FC = () => {
         });
       } else {
       }
-    } catch (error) {}
+    } catch (error) {
+      setIsDisble(true);
+      message.error("Somethin wrong !");
+    }
   };
 
   const handleCancel = () => {
@@ -83,7 +87,10 @@ const PostModal: React.FC = () => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okButtonProps={{ style: { background: "#4096FF" } }}
+        okButtonProps={{
+          style: { background: "#4096FF", color: "white" },
+          disabled: isDisble,
+        }}
         okText="Post"
       >
         <Form form={form} onFinish={onFormFinish}>
@@ -105,9 +112,12 @@ const PostModal: React.FC = () => {
                       file.type === "image/jpeg" || file.type === "image/png";
                     if (!isJPG) {
                       message.error("You can only upload JPG or PNG file!");
+                      setImageUpload("");
+
                       return false;
                     } else {
                       setImageUpload(file);
+                      setIsDisble(false);
                       return true;
                     }
                   }}
