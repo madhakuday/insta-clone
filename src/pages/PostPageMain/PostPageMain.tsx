@@ -4,10 +4,23 @@ import { db } from "../../firebase";
 import { getDocs, collection, onSnapshot, doc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import BottomNavigation from "../../components/BootomNavigation/BottomNavigation";
+import { Alert } from "antd";
+import swal from "sweetalert";
 
 const PostPageMain = () => {
   const [posts, setPosts] = useState<any>([]);
-  // const [commentData, setCommentData] = useState<any>({});
+
+  useEffect(() => {
+    let pop_status = localStorage.getItem("pop_status");
+    if (!pop_status) {
+      localStorage.setItem("pop_status", "1");
+      swal(
+        `Working on you ui and profile page. 
+       this is only test for version.
+       Have a nice day 😊`
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const postRef = collection(db, "post");
