@@ -48,7 +48,7 @@ const Posts = ({ postsData }: any) => {
           const { data } = x;
           return (
             <React.Fragment key={x.id}>
-              <div className="p-2 rounded bg-slate-300 my-4 w-full md:w-1/2  ">
+              <div className="p-2 rounded bg-slate-300 my-4 w-screen md:w-1/2  ">
                 <div className="card-header p-3  flex gap-4 bg-slate-200 rounded my-1 ">
                   <Avatar size={30} icon={<UserOutlined />} />
                   <p className="text text-sm mb-0 flex items-center">
