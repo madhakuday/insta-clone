@@ -46,7 +46,6 @@ const PostPageMain = () => {
     // );
     // onSnapshot(messageRef, (querySnapshot: any) => {
     //   querySnapshot.forEach((doc: any) => {
-    //     console.log("Id: ", doc.id, "Data: ", doc.data());
     //     setCommentData({ id: doc.id, data: doc.data() });
     //   });
     // });

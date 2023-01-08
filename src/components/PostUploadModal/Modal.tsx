@@ -60,7 +60,6 @@ const PostModal: React.FC = () => {
                 : logdInUser?.name,
               timeStamp: serverTimestamp(),
             };
-            console.log("Upload Data", data);
             let a = await setDoc(doc(db, "post", uuid()), data);
             setIsModalOpen(false);
             message.success("Done");
@@ -104,7 +103,6 @@ const PostModal: React.FC = () => {
                   beforeUpload={(file) => {
                     const isJPG =
                       file.type === "image/jpeg" || file.type === "image/png";
-                    console.log("isJPG", isJPG);
                     if (!isJPG) {
                       message.error("You can only upload JPG or PNG file!");
                       return false;

@@ -10,10 +10,7 @@ const Profile = () => {
   const { user } = useSelector(
     (state: { user: { user: any } }) => state?.user?.user
   );
-  useEffect(() => {
-    console.log("User ", user);
-  }, [user]);
-
+ 
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };

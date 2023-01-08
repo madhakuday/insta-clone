@@ -26,7 +26,6 @@ const Posts = ({ postsData }: any) => {
   //   );
   //   onSnapshot(messageRef, (querySnapshot: any) => {
   //     querySnapshot.forEach((doc: any) => {
-  //       console.log("Id: ", doc.id, "Data: ", doc.data());
   //       setCommentData({ id: doc.id, data: doc.data() });
   //     });
   //   });
@@ -37,7 +36,6 @@ const Posts = ({ postsData }: any) => {
   // }, []);
 
   useEffect(() => {
-    console.log("PostData ", postsData);
     setData(postsData);
   }, [postsData]);
 
