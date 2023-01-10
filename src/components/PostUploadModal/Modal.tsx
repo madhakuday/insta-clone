@@ -22,7 +22,7 @@ import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 
-const PostModal: React.FC = () => {
+const PostModal = ({ content }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUpload, setImageUpload] = useState<any>("");
   const [isDisble, setIsDisble] = useState<boolean>(true);
@@ -81,7 +81,7 @@ const PostModal: React.FC = () => {
 
   return (
     <>
-      <UploadOutlined onClick={showModal} />
+      <div onClick={showModal}>{content}</div>
       <Modal
         title="Post..."
         open={isModalOpen}

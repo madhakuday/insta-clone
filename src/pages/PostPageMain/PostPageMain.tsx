@@ -1,4 +1,4 @@
-import Posts from "../../components/Posts/Posts";
+import Posts from "../../components/Posts/Card";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import {
@@ -57,8 +57,7 @@ const PostPageMain = () => {
 
   return (
     <>
-      <BottomNavigation />
-      <div className="w-full bg-slate-600 p-2  flex  min-h-screen ">
+      <div className="w-full bg-slate-600 p-2  flex  min-h-screen pb-16">
         <div className="w-1/2 flex  m-auto ">
           <Posts postsData={posts} />
         </div>

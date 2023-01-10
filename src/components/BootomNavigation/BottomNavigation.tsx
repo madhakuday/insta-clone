@@ -4,6 +4,7 @@ import { BiBook } from "react-icons/bi";
 import "./BottomNavigation.scss";
 import PostModal from "../PostUploadModal/Modal";
 import { Link } from "react-router-dom";
+import { UploadOutlined } from "@ant-design/icons";
 
 const BottomNavigation = () => {
   const [activeNav, setActiveNav] = useState("#home");
@@ -23,7 +24,7 @@ const BottomNavigation = () => {
           className={activeNav === "#about" ? "active" : ""}
           style={{ color: "white" }}
         >
-          <PostModal />
+          <PostModal content={<UploadOutlined />} />
         </a>
         <Link
           to="/profile"
