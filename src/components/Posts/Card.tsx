@@ -1,8 +1,9 @@
 import React from "react";
-import { HeartFilled, CommentOutlined, EditOutlined } from "@ant-design/icons";
+import { HeartFilled, CommentOutlined, EditOutlined, } from "@ant-design/icons";
 import { Avatar, Button, Card } from "antd";
 
 import "./card.scss";
+import MoreMenuDropDown from "../MoreMenuDropDown/MoreMenuDropDown";
 const { Meta } = Card;
 const Cards: React.FC<any> = ({ postsData }) => {
   React.useEffect(() => {
@@ -29,8 +30,8 @@ const Cards: React.FC<any> = ({ postsData }) => {
                     />
                   </>
                 }
-                style={{ width: 300 }}
-                cover={<img alt="image..." src={data?.imageUrl} />}
+                extra={<MoreMenuDropDown id={x.id} />}
+                cover={<div className="flex items-center justify-center "><img alt="image..." className="w-10/12 sm:w-full m-auto" src={data?.imageUrl} width='85%' /></div>}
                 actions={[
                   <>
                     <div className="flex justify-around">
@@ -46,7 +47,8 @@ const Cards: React.FC<any> = ({ postsData }) => {
                     </div>
                   </>,
                 ]}
-                className="my-3"
+
+                className="my-3 w-full sm:w-72	"
               >
                 <p className="font-semibold  text-xs"> {data?.description}</p>
               </Card>

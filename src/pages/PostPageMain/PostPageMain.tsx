@@ -57,8 +57,8 @@ const PostPageMain = () => {
 
   return (
     <>
-      <div className="w-full bg-slate-600 p-2  flex  min-h-screen pb-16">
-        <div className="w-1/2 flex  m-auto ">
+      <div className="w-full bg-slate-600 p-0 sm:p-2  flex  min-h-screen pb-16">
+        <div className="w-full sm:w-1/2 flex  m-auto ">
           <Posts postsData={posts} />
         </div>
       </div>

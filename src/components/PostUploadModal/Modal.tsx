@@ -14,7 +14,6 @@ import {
   UploadProps,
 } from "antd";
 
-import "./Modal.css";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 
