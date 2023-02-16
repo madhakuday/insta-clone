@@ -33,7 +33,6 @@ type Props = {
 
 const DesktopNavigation: React.FC<Props> = ({ collapsed, setContentWidth, setCollapsed }) => {
   return < >
-
     <Sider
       collapsible
       collapsed={collapsed}
@@ -42,7 +41,7 @@ const DesktopNavigation: React.FC<Props> = ({ collapsed, setContentWidth, setCol
           if (collapsed) {
             setContentWidth("13.1%");
           } else {
-            setContentWidth("4.2%");
+            setContentWidth("5.2%");
           }
         }, 100);
         setCollapsed(value);

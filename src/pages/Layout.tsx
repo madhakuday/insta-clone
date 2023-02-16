@@ -8,7 +8,7 @@ const { Content, Footer } = Layout;
 
 const LayOut: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [contentWidth, setContentWidth] = useState("11.1%");
+  const [contentWidth, setContentWidth] = useState("13.1%");
   const [screenWidth, setScreenWidth] = useState<number>(0);
 
   function setWidth() {
