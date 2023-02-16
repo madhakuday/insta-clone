@@ -40,7 +40,7 @@ const DesktopNavigation: React.FC<Props> = ({ collapsed, setContentWidth, setCol
       onCollapse={(value) => {
         setTimeout(() => {
           if (collapsed) {
-            setContentWidth("11.1%");
+            setContentWidth("13.1%");
           } else {
             setContentWidth("4.2%");
           }

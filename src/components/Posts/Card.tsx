@@ -1,6 +1,6 @@
 import React from "react";
 import { HeartFilled, CommentOutlined, EditOutlined, } from "@ant-design/icons";
-import { Avatar, Button, Card } from "antd";
+import { Avatar, Card } from "antd";
 
 import "./card.scss";
 import MoreMenuDropDown from "../MoreMenuDropDown/MoreMenuDropDown";
@@ -48,7 +48,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                   </>,
                 ]}
 
-                className="my-3 w-full sm:w-72	"
+                className="my-3 w-full sm:w-80	"
               >
                 <p className="font-semibold  text-xs"> {data?.description}</p>
               </Card>
