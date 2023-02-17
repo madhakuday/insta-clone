@@ -9,38 +9,43 @@ import {
   Input,
   Modal,
   Row,
-  Upload,
   message,
-  UploadProps,
 } from "antd";
-
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
-
+import FileUploading from "react-files-uploading";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
-import { FirebaseError } from "firebase/app";
 
 const PostModal = ({ content }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUpload, setImageUpload] = useState<any>("");
   const [isDisble, setIsDisble] = useState<boolean>(true);
+  const [files, setFiles] = React.useState<File[]>([]);
+
+
 
   const [form] = Form.useForm();
   const logdInUser = useSelector((state: any) => state?.user?.user?.user);
-
+  const onChange = (file: File[]) => {
+    const isJPG =
+      file[0].type === "image/jpeg" ||
+      file[0].type === "image/jpg" ||
+      file[0].type === "image/png";
+    if (!isJPG) {
+      message.error("You can only upload JPG or PNG file!");
+      setImageUpload("");
+      return false;
+    } else {
+      setImageUpload(file[0]);
+      setIsDisble(false);
+      return true;
+    }
+  };
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const props: UploadProps = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    multiple: false,
-    maxCount: 1,
-  };
+
 
   const handleOk = () => {
     form.submit();
@@ -59,10 +64,11 @@ const PostModal = ({ content }: any) => {
                 ? logdInUser?.nickname
                 : logdInUser?.name,
               timeStamp: serverTimestamp(),
+              userProfile: logdInUser.picture
             };
-            let a = await setDoc(doc(db, "post", uuid()), data);
-            setIsModalOpen(false);
             message.success("Done");
+            setIsModalOpen(false);
+            let a = await setDoc(doc(db, "post", uuid()), data);
             form.resetFields();
           });
         });
@@ -97,36 +103,52 @@ const PostModal = ({ content }: any) => {
             <Col span={24}>
               <Form.Item
                 name="description"
-                rules={[{ required: true, message: "This is required" }]}
+                rules={[{ required: true, message: "This field is required" }]}
               >
                 <Input placeholder="Description" />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="upload">
-                <Upload
-                  {...props}
-                  beforeUpload={(file) => {
-                    console.log("file", file);
-
-                    const isJPG =
-                      file.type === "image/jpeg" ||
-                      file.type === "image/jpg" ||
-                      file.type === "image/png";
-                    if (!isJPG) {
-                      message.error("You can only upload JPG or PNG file!");
-                      setImageUpload("");
-
-                      return false;
-                    } else {
-                      setImageUpload(file);
-                      setIsDisble(false);
-                      return true;
-                    }
-                  }}
+                <FileUploading
+                  multiple={false}
+                  value={files}
+                  maxNumber={1}
+                  onChange={onChange}
                 >
-                  <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                </Upload>
+                  {({
+                    fileList,
+                    errors,
+                    isDragging,
+                    onFileUpload,
+                    dragProps,
+                  }) => {
+                    return (
+                      <div className="upload__file-wrapper">
+                        <Button
+                          icon={<UploadOutlined />}
+                          id="btn-upload"
+                          // type="button"
+                          style={isDragging ? { color: "red" } : undefined}
+                          onClick={onFileUpload}
+                          {...dragProps}
+                        >
+                          Upload
+                        </Button>
+
+                        <div id="list-files">
+                          {fileList.map((file, index) => (
+                            <div key={`file-${index}`} className="file-item">
+                              <p>{file.name}</p>
+
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }}
+                </FileUploading>
+
               </Form.Item>
             </Col>
           </Row>

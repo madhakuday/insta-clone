@@ -6,15 +6,13 @@ import "./card.scss";
 import MoreMenuDropDown from "../MoreMenuDropDown/MoreMenuDropDown";
 const { Meta } = Card;
 const Cards: React.FC<any> = ({ postsData }) => {
-  React.useEffect(() => {
-    console.log("PostD : ", postsData);
-  }, []);
+
   return (
     <div className="w-full flex flex-col items-center">
       {postsData?.map(
         (x: {
           id: string;
-          data: { username: string; imageUrl: string; description: string };
+          data: { username: string; imageUrl: string; description: string, userProfile: string };
         }) => {
           const { data } = x;
           return (
@@ -24,13 +22,14 @@ const Cards: React.FC<any> = ({ postsData }) => {
                   <>
                     <Meta
                       avatar={
-                        <Avatar src="https://assets.stickpng.com/thumbs/585e4beacb11b227491c3399.png" />
+                        // <Avatar src="https://assets.stickpng.com/thumbs/585e4beacb11b227491c3399.png" />
+                        <Avatar src={x.data.userProfile} />
                       }
                       title={data?.username}
                     />
                   </>
                 }
-                extra={<MoreMenuDropDown id={x.id} />}
+                extra={<MoreMenuDropDown data={x} />}
                 cover={<div className="flex items-center justify-center "><img alt="image..." className="w-10/12 sm:w-full m-auto" src={data?.imageUrl} width='85%' /></div>}
                 actions={[
                   <>

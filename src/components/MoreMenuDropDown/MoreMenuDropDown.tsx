@@ -1,27 +1,46 @@
 import React from "react";
 import { MoreOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
+import { MenuProps, message } from "antd";
 import { Dropdown, Space } from "antd";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
-const MoreMenuDropDown: React.FC<any> = ({ id }) => {
-    async function deleteData(id: string) {
+const MoreMenuDropDown: React.FC<any> = (data) => {
+    async function deleteData() {
+        console.log(data);
+
         try {
-            console.log('Id', id)
-            let data = await deleteDoc(doc(db, "post", id));
-            console.log("Data", data);
+            await deleteDoc(doc(db, "post", data.data.id));
+            let imageUrl = data.data.data.imageUrl;
+            console.log(imageUrl);
+
+            const storage = getStorage();
+            const fileRef = ref(storage, imageUrl)
+
+            deleteObject(fileRef)
+                .then(() => {
+                    console.log("File deleted successfully");
+                })
+                .catch((error) => {
+                    console.log("Error deleting file:", error);
+                });
+
+            message.success('Done')
         } catch (error) {
+            message.error(':)')
+
             console.log("Error  :", error);
         }
     }
 
     const items: MenuProps["items"] = [
         {
-            label: <p onClick={() => deleteData(id)}>Delete</p>,
+            label: <p style={{ margin: '0' }} onClick={() => deleteData()}>Delete</p>,
             key: "0",
         },
     ];
+
 
     return (
         <Dropdown menu={{ items }} trigger={["click"]}>
