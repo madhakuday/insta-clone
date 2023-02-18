@@ -9,10 +9,13 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    updatePostId: (state, action) => {
+      state.user.likedPosts = action.payload;
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, updatePostId } = userSlice.actions;
 
 export const selectuser = (state) => state?.user;
 

@@ -13,9 +13,12 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import BottomNavigation from "../../components/BootomNavigation/BottomNavigation";
 import { Alert } from "antd";
 import swal from "sweetalert";
+import getLikedPost from "../../function/useGetLikedPost";
+import { useSelector } from "react-redux";
 
 const PostPageMain = () => {
   const [posts, setPosts] = useState<any>([]);
+  const logdInUser = useSelector((state: any) => state?.user?.user?.user);
 
   useEffect(() => {
     let pop_status = localStorage.getItem("pop_status");
@@ -32,9 +35,13 @@ const PostPageMain = () => {
   useEffect(() => {
     // const postRef = collection(db, "post");
     const postRef = query(collection(db, "post"), orderBy("timeStamp", "desc"));
-
     const unsub = onSnapshot(postRef, (snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
+    });
+
+    const likedPostsquery = query(collection(db, "UserConfigurations"));
+    const likedPosts = onSnapshot(likedPostsquery, (snapshot) => {
+      getLikedPost({ ...logdInUser });
     });
 
     /*Sub collection Query */
@@ -52,6 +59,7 @@ const PostPageMain = () => {
 
     return () => {
       unsub();
+      likedPosts();
     };
   }, []);
 

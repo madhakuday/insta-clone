@@ -62,13 +62,6 @@ const Posts = ({ postsData }: any) => {
                   />
                 </div>
                 <div className="card-footer bg-slate-200 p-2 rounded my-4">
-                  {/* <span className="p-2 text-lg text-red-700 cursor-pointer">
-                    <HeartOutlined />
-                  </span>
-                  <span className="p-2 text-lg  cursor-pointer">
-                    <CommentOutlined />
-                  </span> */}
-
                   <p className="mx-3 p-1 my-1 font-serif bg-slate-300 rounded ">
                     {data?.description}
                   </p>

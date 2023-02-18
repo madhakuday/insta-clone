@@ -16,14 +16,13 @@ import uuid from "react-uuid";
 import FileUploading from "react-files-uploading";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const PostModal = ({ content }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUpload, setImageUpload] = useState<any>("");
   const [isDisble, setIsDisble] = useState<boolean>(true);
   const [files, setFiles] = React.useState<File[]>([]);
-
-
 
   const [form] = Form.useForm();
   const logdInUser = useSelector((state: any) => state?.user?.user?.user);
@@ -46,7 +45,6 @@ const PostModal = ({ content }: any) => {
     setIsModalOpen(true);
   };
 
-
   const handleOk = () => {
     form.submit();
   };
@@ -64,11 +62,44 @@ const PostModal = ({ content }: any) => {
                 ? logdInUser?.nickname
                 : logdInUser?.name,
               timeStamp: serverTimestamp(),
-              userProfile: logdInUser.picture
+              userProfile: logdInUser.picture,
+              array: [""],
+              userAuthId: logdInUser.sub,
             };
+
+            //  User Configration Table
+            console.log("logdInUser", logdInUser);
+            const q = query(
+              collection(db, "UserConfigurations"),
+              where("userAuthId", "==", logdInUser?.sub)
+            );
+
+            getDocs(q)
+              .then(async (querySnapshot) => {
+                const documents: any = [];
+                querySnapshot.forEach((doc) => {
+                  documents.push(doc.data());
+                });
+                console.log("Documet : ", documents);
+                const UserConfigurationsData = {
+                  userAuthId: logdInUser?.sub,
+                  postId: [],
+                };
+                if (documents.length == 0) {
+                  let a = await setDoc(
+                    doc(db, "UserConfigurations", uuid()),
+                    UserConfigurationsData
+                  );
+                }
+              })
+              .catch((error) => {
+                console.log("Error getting documents:", error);
+              });
+
+            // --
+            let a = await setDoc(doc(db, "post", uuid()), data);
             message.success("Done");
             setIsModalOpen(false);
-            let a = await setDoc(doc(db, "post", uuid()), data);
             form.resetFields();
           });
         });
@@ -140,7 +171,6 @@ const PostModal = ({ content }: any) => {
                           {fileList.map((file, index) => (
                             <div key={`file-${index}`} className="file-item">
                               <p>{file.name}</p>
-
                             </div>
                           ))}
                         </div>
@@ -148,7 +178,6 @@ const PostModal = ({ content }: any) => {
                     );
                   }}
                 </FileUploading>
-
               </Form.Item>
             </Col>
           </Row>
