@@ -20,11 +20,12 @@ import { db } from "../../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 const Cards: React.FC<any> = ({ postsData }) => {
+  const navigate = useNavigate();
   const logdInUser = useSelector((state: any) => state?.user?.user);
-
   return (
     <div className="w-full flex flex-col items-center">
       {postsData?.map(
@@ -45,8 +46,21 @@ const Cards: React.FC<any> = ({ postsData }) => {
                 title={
                   <>
                     <Meta
-                      avatar={<Avatar src={x.data.userProfile} />}
-                      title={data?.username}
+                      title={
+                        <>
+                          <div className="">
+                            <Link to={`/${x?.id}`} className="flex gap-2">
+                              <Avatar
+                                className="cursor-pointer"
+                                src={x?.data?.userProfile}
+                              />
+                              <p className="cursor-pointer font-semibold">
+                                {data?.username}
+                              </p>
+                            </Link>
+                          </div>
+                        </>
+                      }
                     />
                   </>
                 }

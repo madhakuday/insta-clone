@@ -1,13 +1,44 @@
-import { Card } from "antd";
 import Typography from "antd/es/typography/Typography";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import "./UserProfile.scss";
+import { useSelector } from "react-redux";
+import { db } from "../../firebase";
 
 const UserProfile = () => {
-  const { id } = useParams();
+  const [userData, setUserData] = useState<any>({});
+  const [postData, setPostData] = useState<any>([]);
+  const { id }: any = useParams();
+  const logdInUser = useSelector((state: any) => state?.user?.user?.user);
+
   useEffect(() => {
-    console.log("Id", id);
+    (async () => {
+      console.log("Id", id);
+      const docRef = doc(db, "post", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+        const q = query(
+          collection(db, "post"),
+          where("userAuthId", "==", docSnap?.data().userAuthId)
+        );
+        getDocs(q)
+          .then(async (querySnapshot) => {
+            const documents: any = [];
+            querySnapshot.forEach((doc) => {
+              documents.push(doc.data());
+            });
+            setPostData(documents);
+          })
+          .catch((error) => {
+            console.log("Error getting documents:", error);
+          });
+      } else {
+        console.log("Document does not exist");
+      }
+    })();
   }, []);
 
   return (
@@ -16,16 +47,16 @@ const UserProfile = () => {
         <div className="p-3 border-b-2 border-cyan-200">
           <div className="flex justify-evenly ">
             <img
-              src="https://i1.wp.com/cdn.auth0.com/avatars/ad.png?ssl=1"
+              src={userData?.userProfile}
               alt="UserLog..."
               className="rounded-full"
             />
             <div>
               <Typography className="text-white p-2 font-family">
-                UserName
+                {userData?.username}
               </Typography>
               <Typography className="text-white p-2 font-family">
-                Some data Some data Some data{" "}
+                Some data Some data Some data
               </Typography>
             </div>
           </div>
@@ -34,169 +65,33 @@ const UserProfile = () => {
         <div className="p-3 ">
           <section className="overflow-hidden text-gray-700 ">
             <div className="container   mx-auto pt-5 ">
-              <div className="flex flex-wrap -m-1 md:-m-2 justify-center">
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(76).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(76).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(76).webp"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
-                  <div className="w-full p-1 md:p-2">
-                    <img
-                      alt="gallery"
-                      className="block object-cover object-center w-full h-full rounded-lg"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-                    />
-                  </div>
-                </div>
+              <div className="flex flex-wrap -m-1 md:-m-2 md:justify-start justify-center">
+                {postData?.map(
+                  (
+                    {
+                      imageUrl,
+                      userAuthId,
+                    }: {
+                      userAuthId: string;
+                      imageUrl: string;
+                    },
+                    i: number
+                  ) => {
+                    return (
+                      <React.Fragment key={i}>
+                        <div className="flex flex-wrap w-2/5 md:w-1/3 cursor-pointer ">
+                          <div className="w-full p-1 md:p-2">
+                            <img
+                              alt="gallery"
+                              className="block object-cover object-center w-full h-full rounded-lg"
+                              src={imageUrl}
+                            />
+                          </div>
+                        </div>
+                      </React.Fragment>
+                    );
+                  }
+                )}
               </div>
             </div>
           </section>
