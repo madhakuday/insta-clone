@@ -8,7 +8,6 @@ const { Content, Footer } = Layout;
 
 const LayOut: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [contentWidth, setContentWidth] = useState("13.1%");
   const [screenWidth, setScreenWidth] = useState<number>(0);
 
   function setWidth() {
@@ -18,25 +17,15 @@ const LayOut: React.FC = () => {
     setWidth();
   }, []);
 
-  window.addEventListener('resize', setWidth)
+  window.addEventListener("resize", setWidth);
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {screenWidth > 950 && (
-        <DesktopNavigation
-          collapsed={collapsed}
-          setContentWidth={setContentWidth}
-          setCollapsed={setCollapsed}
-        />
+        <DesktopNavigation collapsed={collapsed} setCollapsed={setCollapsed} />
       )}
 
       <Layout className="site-layout" style={{ background: "#8a94a7" }}>
-        <Content
-          style={{
-            overflow: "initial",
-            height: 0,
-            paddingLeft: screenWidth > 950 ? contentWidth : "0",
-          }}
-        >
+        <Content>
           <div className="md:mb-2">
             <Outlet />
           </div>
