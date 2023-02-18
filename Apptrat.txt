@@ -1,0 +1,6 @@
+User add post -> table(User Liked) => {userAuthId , postId , UserName }
+|-> if(userAuthId) = Add Empty array
+User Like Post ->
+|- Check UserAuthId 
+  |- if(check postId exist in array)= remove that PostId from array 
+  |- else = add that PostId

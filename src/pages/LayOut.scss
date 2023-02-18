@@ -1,8 +1,11 @@
 .content-main-div{
     padding-bottom: 0;
+        height: 100%;
+
 }
 @media screen and (max-width :950px) {
     .content-main-div {
         padding-bottom: 4.099rem;
+        height: 100%;
     }
 }

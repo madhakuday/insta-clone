@@ -26,7 +26,7 @@ const LayOut: React.FC = () => {
 
       <Layout className="site-layout" style={{ background: "#475569" }}>
         <Content>
-          <div className="  content-main-div">
+          <div className="content-main-div">
             <Outlet />
           </div>
         </Content>
