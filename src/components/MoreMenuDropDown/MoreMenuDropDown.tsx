@@ -29,23 +29,22 @@ const MoreMenuDropDown: React.FC<any> = (data) => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log("userAuthId", user.sub);
-  //   console.log("Sub", data?.data?.data.userAuthId);
-  // }, []);
-
   const items: MenuProps["items"] = [
+    user.sub == data?.data?.data?.userAuthId
+      ? {
+          label: (
+            <>
+              <p style={{ margin: "0" }} onClick={() => deleteData()}>
+                Delete
+              </p>
+            </>
+          ),
+          key: "0",
+        }
+      : { label: "0", key: 2, style: { display: "none" } },
     {
-      label: (
-        <>
-          {user.sub == data?.data?.data?.userAuthId && (
-            <p style={{ margin: "0" }} onClick={() => deleteData()}>
-              Delete
-            </p>
-          )}
-        </>
-      ),
-      key: "0",
+      key: 3,
+      label: "Copy Link",
     },
   ];
 

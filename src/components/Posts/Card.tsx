@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   HeartFilled,
   CommentOutlined,
@@ -12,7 +12,7 @@ import {
   arrayUnion,
   arrayRemove,
   setDoc,
-} from "firebase/firestore"; // Import necessary methods from Firebase
+} from "firebase/firestore";
 
 import "./card.scss";
 import MoreMenuDropDown from "../MoreMenuDropDown/MoreMenuDropDown";
@@ -24,9 +24,7 @@ import uuid from "react-uuid";
 const { Meta } = Card;
 const Cards: React.FC<any> = ({ postsData }) => {
   const logdInUser = useSelector((state: any) => state?.user?.user);
-  useEffect(() => {
-    console.log("logdInUser", logdInUser);
-  }, []);
+
   return (
     <div className="w-full flex flex-col items-center">
       {postsData?.map(
@@ -69,8 +67,6 @@ const Cards: React.FC<any> = ({ postsData }) => {
                       <span
                         className="text-lg text-red-600"
                         onClick={async () => {
-                          console.log("l", logdInUser);
-
                           const q = query(
                             collection(db, "UserConfigurations"),
                             where("userAuthId", "==", logdInUser?.user?.sub)
@@ -99,7 +95,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                                 });
                               });
 
-                              const { postId, userAuthId, id } = documents[0];
+                              const { postId, id } = documents[0];
                               const docRef = doc(db, "UserConfigurations", id);
                               if (postId?.includes(x.id)) {
                                 await updateDoc(docRef, {
