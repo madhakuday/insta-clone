@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HeartFilled,
   CommentOutlined,
@@ -24,7 +24,9 @@ import uuid from "react-uuid";
 const { Meta } = Card;
 const Cards: React.FC<any> = ({ postsData }) => {
   const logdInUser = useSelector((state: any) => state?.user?.user);
-
+  useEffect(() => {
+    console.log("logdInUser", logdInUser);
+  }, []);
   return (
     <div className="w-full flex flex-col items-center">
       {postsData?.map(
