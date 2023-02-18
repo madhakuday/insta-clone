@@ -99,7 +99,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
 
                               const { postId, userAuthId, id } = documents[0];
                               const docRef = doc(db, "UserConfigurations", id);
-                              if (postId.includes(x.id)) {
+                              if (postId?.includes(x.id)) {
                                 await updateDoc(docRef, {
                                   postId: arrayRemove(x.id),
                                 });
@@ -130,7 +130,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                           // }
                         }}
                       >
-                        {logdInUser.likedPosts.includes(x.id) ? (
+                        {logdInUser?.likedPosts?.includes(x.id) ? (
                           <HeartFilled />
                         ) : (
                           <HeartOutlined />
