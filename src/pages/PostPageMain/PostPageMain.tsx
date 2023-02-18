@@ -1,17 +1,7 @@
 import Posts from "../../components/Posts/Card";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import {
-  getDocs,
-  collection,
-  onSnapshot,
-  doc,
-  query,
-  orderBy,
-} from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import BottomNavigation from "../../components/BootomNavigation/BottomNavigation";
-import { Alert } from "antd";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import swal from "sweetalert";
 import getLikedPost from "../../function/useGetLikedPost";
 import { useSelector } from "react-redux";
@@ -33,7 +23,6 @@ const PostPageMain = () => {
   }, []);
 
   useEffect(() => {
-    // const postRef = collection(db, "post");
     const postRef = query(collection(db, "post"), orderBy("timeStamp", "desc"));
     const unsub = onSnapshot(postRef, (snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));

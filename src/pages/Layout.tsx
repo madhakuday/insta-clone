@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import { BottomNavigation } from "../components";
 import DesktopNavigation from "../components/DeskTopNavigation/DesktopNavigation";
-
+import "./LayOut.scss";
 const { Content, Footer } = Layout;
 
 const LayOut: React.FC = () => {
@@ -24,9 +24,9 @@ const LayOut: React.FC = () => {
         <DesktopNavigation collapsed={collapsed} setCollapsed={setCollapsed} />
       )}
 
-      <Layout className="site-layout" style={{ background: "#8a94a7" }}>
+      <Layout className="site-layout" style={{ background: "#475569" }}>
         <Content>
-          <div className="md:mb-2">
+          <div className="  content-main-div">
             <Outlet />
           </div>
         </Content>

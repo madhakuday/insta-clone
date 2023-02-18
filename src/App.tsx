@@ -5,8 +5,6 @@ import store from "./redux/store/store";
 import { setUser } from "./redux/reducer/reducer";
 import { LandingPage } from "./pages/index";
 import { Loader } from "./components/index";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "./firebase";
 import getLikedPost from "./function/useGetLikedPost";
 
 const App = () => {

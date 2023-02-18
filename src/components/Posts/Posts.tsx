@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  UserOutlined,
-  // HeartOutlined,
-  // CommentOutlined,
-} from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
-// import { db } from "../../firebase";
-// import { getDocs, collection, onSnapshot, doc } from "firebase/firestore";
-// import { useCollectionData } from "react-firebase-hooks/firestore";
 const Posts = ({ postsData }: any) => {
   const [data, setData] = useState<any>([]);
   // const [commentData, setCommentData] = useState<any>({});
@@ -76,15 +69,3 @@ const Posts = ({ postsData }: any) => {
 };
 
 export default Posts;
-
-
-/**
- *
- *   REACT_APP_API_KEY  = "AIzaSyBhk3hbvW7j_1gPAvquBMuIm_G1wwy7RC0"
- * REACT_APP_DOMAIN= "insta-clone-c2337.firebaseapp.com"
- ** REACT_APP_PROJECT_ID= "insta-clone-c2337"
-  * REACT_APP_STORAGE_BUCKET = "insta-clone-c2337.appspot.com"
-  * REACT_APP_MESSAGEINGSEND_ID = "756461617222"
-  REACT_APP_APP_ID =  "1:756461617222:web:759c43238304617a1fca47"
-  REACT_APP_MEASUREMENT_IF = "G-X8VE3BM42C"
- */
