@@ -2,7 +2,7 @@ import Typography from "antd/es/typography/Typography";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
-import { setDoc, doc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import "./UserProfile.scss";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase";
@@ -13,32 +13,33 @@ const UserProfile = () => {
   const { id }: any = useParams();
   const logdInUser = useSelector((state: any) => state?.user?.user?.user);
 
-  useEffect(() => {
-    (async () => {
-      console.log("Id", id);
-      const docRef = doc(db, "post", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUserData(docSnap.data());
-        const q = query(
-          collection(db, "post"),
-          where("userAuthId", "==", docSnap?.data().userAuthId)
-        );
-        getDocs(q)
-          .then(async (querySnapshot) => {
-            const documents: any = [];
-            querySnapshot.forEach((doc) => {
-              documents.push(doc.data());
-            });
-            setPostData(documents);
-          })
-          .catch((error) => {
-            console.log("Error getting documents:", error);
+  const getUserData = async () => {
+    const docRef = doc(db, "post", id);
+
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setUserData(docSnap.data());
+      const q = query(
+        collection(db, "post"),
+        where("userAuthId", "==", docSnap?.data().userAuthId)
+      );
+      getDocs(q)
+        .then(async (querySnapshot) => {
+          const documents: any = [];
+          querySnapshot.forEach((doc) => {
+            documents.push(doc.data());
           });
-      } else {
-        console.log("Document does not exist");
-      }
-    })();
+          setPostData(documents);
+        })
+        .catch((error) => {
+          console.log("Error getting documents:", error);
+        });
+    } else {
+      console.log("Document does not exist");
+    }
+  };
+  useEffect(() => {
+    getUserData();
   }, []);
 
   return (
