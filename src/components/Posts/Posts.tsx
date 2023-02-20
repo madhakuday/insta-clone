@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
+
 const Posts = ({ postsData }: any) => {
   const [data, setData] = useState<any>([]);
   // const [commentData, setCommentData] = useState<any>({});

@@ -73,7 +73,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                     <Link
                       to={data?.imageUrl}
                       className="cursor-pointer"
-                      rel="noopener noreferrer"
+                      rel="noreferrer"
                     >
                       <img
                         alt="image..."
@@ -88,7 +88,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                   <>
                     <div className="flex justify-around">
                       <span
-                        className="text-lg text-red-600 flex flex-col items-center"
+                        className="text-lg text-red-600 flex flex-col items-center "
                         onClick={async () => {
                           const userSubId = logdInUser?.user?.sub.slice(
                             logdInUser?.user?.sub.indexOf("|") + 1
@@ -159,7 +159,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                         ) : (
                           <HeartOutlined />
                         )}
-                        <span>1</span>
+                        <span style={{ fontSize: ".9rem" }}>1</span>
                       </span>
                       <span className="text-lg text-red-600">
                         <CommentOutlined />
