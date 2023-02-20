@@ -159,6 +159,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                         ) : (
                           <HeartOutlined />
                         )}
+                        1
                       </span>
                       <span className="text-lg text-red-600">
                         <CommentOutlined />
