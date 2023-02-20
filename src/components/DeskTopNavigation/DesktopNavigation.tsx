@@ -43,6 +43,7 @@ const DesktopNavigation: React.FC<Props> = ({ collapsed, setCollapsed }) => {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          theme="dark"
           style={{
             position: "sticky",
             top: "0",
