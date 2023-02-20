@@ -11,7 +11,7 @@ User Like Post ->
 
 /* Todo in Insta  */
 
-* dynamic userName 
+* dynamic userName -Done
 * Post likes count -> check in usercofigration how many id in there (postId Array)
 * Copy Link  -Done
 * Ui

@@ -108,7 +108,9 @@ const PostModal = ({ content }: any) => {
 
   return (
     <>
-      <div onClick={showModal}>{content}</div>
+      <div className="w-full h-full" onClick={showModal}>
+        {content}
+      </div>
       <Modal
         title="Post..."
         open={isModalOpen}
