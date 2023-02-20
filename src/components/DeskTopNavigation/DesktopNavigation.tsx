@@ -40,7 +40,6 @@ const DesktopNavigation: React.FC<Props> = ({ collapsed, setCollapsed }) => {
         className="aside-bg-color"
       >
         <Menu
-          theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
