@@ -40,8 +40,8 @@ const LandingPage = () => {
                 </p> */}
                   <div className="hero-cta">
                     <button>
-                      <span>HoverMe</span>
-                      <span>HoverMe</span>
+                      <span>Sign up</span>
+                      <span>Sign up</span>
                     </button>
                     {/* <p
                       className="button button-primary"
