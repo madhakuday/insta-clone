@@ -88,7 +88,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                   <>
                     <div className="flex justify-around">
                       <span
-                        className="text-lg text-red-600"
+                        className="text-lg text-red-600 flex flex-col items-center"
                         onClick={async () => {
                           const userSubId = logdInUser?.user?.sub.slice(
                             logdInUser?.user?.sub.indexOf("|") + 1
@@ -159,7 +159,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                         ) : (
                           <HeartOutlined />
                         )}
-                        1
+                        <span>1</span>
                       </span>
                       <span className="text-lg text-red-600">
                         <CommentOutlined />
