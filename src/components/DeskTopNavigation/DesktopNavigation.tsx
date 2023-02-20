@@ -44,7 +44,11 @@ const DesktopNavigation: React.FC<Props> = ({ collapsed, setCollapsed }) => {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
-          style={{ position: "sticky", top: "0" }}
+          style={{
+            position: "sticky",
+            top: "0",
+            background: "transparent !important",
+          }}
         />
       </Sider>
     </>
