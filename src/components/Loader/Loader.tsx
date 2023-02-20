@@ -3,35 +3,7 @@ import "./Loader.scss";
 const Loader = () => {
   return (
     <>
-      <div className="loader-main h-full w-full">
-        <div
-          aria-busy="true"
-          aria-label="Loading"
-          role="progressbar"
-          className="container"
-        >
-          <div className="swing">
-            <div className="swing-l"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div className="swing-r"></div>
-          </div>
-          <div className="shadow">
-            <div className="shadow-l"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div className="shadow-r"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* <div
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -42,7 +14,7 @@ const Loader = () => {
         }}
       >
         <span className="loader"></span>
-      </div> */}
+      </div>
     </>
   );
 };
