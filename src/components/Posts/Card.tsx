@@ -49,12 +49,15 @@ const Cards: React.FC<any> = ({ postsData }) => {
                       title={
                         <>
                           <div className="">
-                            <Link to={`/${x?.id}`} className="flex gap-2">
+                            <Link
+                              to={`/${x?.id}`}
+                              className="flex gap-2 items-center "
+                            >
                               <Avatar
                                 className="cursor-pointer"
                                 src={x?.data?.userProfile}
                               />
-                              <p className="cursor-pointer font-semibold">
+                              <p className="cursor-pointer font-semibold m-0">
                                 {data?.username}
                               </p>
                             </Link>
