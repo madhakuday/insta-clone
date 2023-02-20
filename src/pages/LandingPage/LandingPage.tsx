@@ -39,7 +39,7 @@ const LandingPage = () => {
                   have to set it up once, and get beautiful results forever.
                 </p> */}
                   <div className="hero-cta">
-                    <button>
+                    <button onClick={() => loginWithRedirect()}>
                       <span>Sign up</span>
                       <span>Sign up</span>
                     </button>
