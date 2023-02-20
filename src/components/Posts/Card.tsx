@@ -70,14 +70,14 @@ const Cards: React.FC<any> = ({ postsData }) => {
                 extra={<MoreMenuDropDown data={x} />}
                 cover={
                   <div className="flex items-center justify-center ">
-                    <Link to={data?.imageUrl}>
+                    <a href={data?.imageUrl} className="cursor-pointer">
                       <img
                         alt="image..."
                         className="w-10/12 sm:w-full m-auto"
                         src={data?.imageUrl}
                         width="85%"
                       />
-                    </Link>
+                    </a>
                   </div>
                 }
                 actions={[
