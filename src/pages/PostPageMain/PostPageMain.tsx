@@ -5,6 +5,7 @@ import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import swal from "sweetalert";
 import getLikedPost from "../../function/useGetLikedPost";
 import { useSelector } from "react-redux";
+import { ref } from "firebase/storage";
 
 const PostPageMain = () => {
   const [posts, setPosts] = useState<any>([]);
@@ -24,8 +25,48 @@ const PostPageMain = () => {
 
   useEffect(() => {
     const postRef = query(collection(db, "post"), orderBy("timeStamp", "desc"));
-    const unsub = onSnapshot(postRef, (snapshot) => {
-      setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
+
+    const unsub = onSnapshot(postRef, async (snapshot) => {
+      //
+      const postData = snapshot.docs.map((doc) => ({
+        data: doc.data(),
+        id: doc.id,
+      }));
+
+      const userDetailsRef = collection(db, "userDetails");
+
+      onSnapshot(userDetailsRef, async (users) => {
+        const userData = users.docs.map((doc) => ({
+          data: doc.data(),
+          id: doc.id,
+        }));
+
+        const array: any = [];
+
+        postData.forEach((x) => {
+          const findSaeResult = userData.find(
+            (s) => x?.data?.userAuthId == s?.data?.userAuthId
+          );
+          if (findSaeResult) {
+            const object = {
+              id: x.id,
+              userDeatisId: findSaeResult?.id,
+              data: {
+                ...x?.data,
+                ...findSaeResult?.data,
+              },
+            };
+            array.push(object);
+          } else {
+            array.push(x);
+          }
+        });
+
+        setPosts(array);
+      });
+
+      //
+      // setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
     });
 
     const likedPostsquery = query(collection(db, "UserConfigurations"));

@@ -7,7 +7,6 @@ import { setUser } from "../redux/reducer/reducer";
 
 const useGetLikedPost = () => {
   const user = useSelector((state: any) => state?.user?.user?.user);
-  console.log("user", user);
 
   const q = query(
     collection(db, "UserConfigurations"),
@@ -20,7 +19,6 @@ const useGetLikedPost = () => {
       querySnapshot.forEach((doc) => {
         documents.push(doc.data());
       });
-      console.log("Documet : ", documents);
       store.dispatch(
         setUser({
           user: {

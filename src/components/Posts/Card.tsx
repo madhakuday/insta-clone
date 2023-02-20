@@ -81,16 +81,19 @@ const Cards: React.FC<any> = ({ postsData }) => {
                       <span
                         className="text-lg text-red-600"
                         onClick={async () => {
+                          const userSubId = logdInUser?.user?.sub.slice(
+                            logdInUser?.user?.sub.indexOf("|") + 1
+                          );
                           const q = query(
                             collection(db, "UserConfigurations"),
-                            where("userAuthId", "==", logdInUser?.user?.sub)
+                            where("userAuthId", "==", userSubId)
                           );
 
                           getDocs(q)
                             .then(async (querySnapshot) => {
                               if (querySnapshot.empty == true) {
                                 const UserConfigurationsData = {
-                                  userAuthId: logdInUser?.user?.sub,
+                                  userAuthId: userSubId,
                                   postId: [x.id],
                                 };
                                 let a = await setDoc(

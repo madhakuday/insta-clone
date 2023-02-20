@@ -2,15 +2,7 @@ import { db, storage } from "../../firebase";
 import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { serverTimestamp } from "firebase/firestore";
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  Modal,
-  Row,
-  message,
-} from "antd";
+import { Button, Col, Form, Input, Modal, Row, message } from "antd";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 import FileUploading from "react-files-uploading";
@@ -55,23 +47,23 @@ const PostModal = ({ content }: any) => {
         const imageRef = ref(storage, `images/${uuid()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
           getDownloadURL(snapshot.ref).then(async (url) => {
+            const userSubId = logdInUser?.sub.slice(
+              logdInUser?.sub.indexOf("|") + 1
+            );
+
             const data = {
               description: e.description,
               imageUrl: url,
-              username: logdInUser?.nickname
-                ? logdInUser?.nickname
-                : logdInUser?.name,
               timeStamp: serverTimestamp(),
-              userProfile: logdInUser.picture,
+              // userProfile: logdInUser.picture,
               array: [""],
-              userAuthId: logdInUser.sub,
+              userAuthId: userSubId,
             };
 
             //  User Configration Table
-            console.log("logdInUser", logdInUser);
             const q = query(
               collection(db, "UserConfigurations"),
-              where("userAuthId", "==", logdInUser?.sub)
+              where("userAuthId", "==", userSubId)
             );
 
             getDocs(q)
@@ -80,9 +72,8 @@ const PostModal = ({ content }: any) => {
                 querySnapshot.forEach((doc) => {
                   documents.push(doc.data());
                 });
-                console.log("Documet : ", documents);
                 const UserConfigurationsData = {
-                  userAuthId: logdInUser?.sub,
+                  userAuthId: userSubId,
                   postId: [],
                 };
                 if (documents.length == 0) {

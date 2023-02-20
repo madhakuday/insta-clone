@@ -6,6 +6,7 @@ import { setUser } from "./redux/reducer/reducer";
 import { LandingPage } from "./pages/index";
 import { Loader } from "./components/index";
 import getLikedPost from "./function/useGetLikedPost";
+import checkUserExist from "./function/checkUserExist";
 
 const App = () => {
   const [showComp, setShowComp] = useState<boolean>(false);
@@ -23,50 +24,13 @@ const App = () => {
       );
       getLikedPost({ ...user, isAuthenticated });
 
-      // const q = query(
-      //   collection(db, "UserConfigurations"),
-      //   where("userAuthId", "==", user?.sub)
-      // );
-
-      // getDocs(q)
-      //   .then((querySnapshot) => {
-      //     const documents: any = [];
-      //     querySnapshot.forEach((doc) => {
-      //       documents.push(doc.data());
-      //     });
-      //     console.log("Documet : ", documents);
-      //     store.dispatch(
-      //       setUser({
-      //         user: {
-      //           user: {
-      //             ...user,
-      //             isAuthenticated,
-      //           },
-      //           likedPosts: documents[0]?.postId,
-      //         },
-      //       })
-      //     );
-      //   })
-      //   .catch((error) => {
-      //     store.dispatch(
-      //       setUser({
-      //         user: {
-      //           ...user,
-      //           isAuthenticated,
-      //         },
-      //       })
-      //     );
-      //     console.log("Error getting documents:", error);
-      //   });
-
-      //
-
       setShowComp(true);
     }
   }, [user, isAuthenticated]);
 
   useEffect(() => {
     getdata();
+    checkUserExist(user);
   }, [user, getdata]);
 
   return (
