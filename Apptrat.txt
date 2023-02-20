@@ -13,10 +13,10 @@ User Like Post ->
 
 * dynamic userName 
 * Post likes count -> check in usercofigration how many id in there (postId Array)
-* Copy Link  Done
+* Copy Link  -Done
 * Ui
 
 /* Dynamic userName Strategy */
 
-- User login chseck if(userAuth exsit in userDeatils)else(){Save data is userDetails}
+- User come in app check if(userAuth exsit in userDeatils)else(){Save data is userDetails}
 - post userDetails(userAuthId) - post(userAuthId) Donjoin bith table and give output
