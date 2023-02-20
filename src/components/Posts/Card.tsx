@@ -73,7 +73,7 @@ const Cards: React.FC<any> = ({ postsData }) => {
                     <Link
                       to={data?.imageUrl}
                       className="cursor-pointer"
-                      rel="noreferrer"
+                      rel="noopener"
                     >
                       <img
                         alt="image..."
