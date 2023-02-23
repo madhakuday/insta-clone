@@ -1,4 +1,5 @@
-import Posts from "../../components/Posts/Card";
+import React from "react";
+import Cards from "../../components/Posts/Card";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
@@ -95,7 +96,15 @@ const PostPageMain = () => {
     <>
       <div className="w-full bg-slate-600 p-0 sm:p-2  flex  min-h-screen pb-16">
         <div className="w-full sm:w-1/2 flex  m-auto ">
-          <Posts postsData={posts} />
+          <div className="w-full flex flex-col items-center">
+            {posts.map((x: any) => {
+              return (
+                <React.Fragment key={x?.id}>
+                  <Cards data={x} />
+                </React.Fragment>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

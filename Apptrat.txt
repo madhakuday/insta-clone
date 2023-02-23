@@ -20,3 +20,10 @@ User Like Post ->
 
 - User come in app check if(userAuth exsit in userDeatils)else(){Save data is userDetails}
 - post userDetails(userAuthId) - post(userAuthId) Donjoin bith table and give output
+
+/*Post Like flow */
+|-> Posts() 
+  Post1 => Like(10) 
+  Post2 => Like(2) 
+  Post3 => Like(0) 
+  |-> userConfigration(Table)-(PostId(Array) ,userAuthId) |-> postsArray[{Likes :}]
