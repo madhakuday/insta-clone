@@ -1,10 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import RouteCom from "./routes/RouteCom";
 import { useAuth0 } from "@auth0/auth0-react";
+
 import store from "./redux/store/store";
 import { setUser } from "./redux/reducer/reducer";
+
 import { LandingPage } from "./pages/index";
 import { Loader } from "./components/index";
+
 import getLikedPost from "./function/useGetLikedPost";
 import checkUserExist from "./function/checkUserExist";
 

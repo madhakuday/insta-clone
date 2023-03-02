@@ -1,12 +1,11 @@
 import React from "react";
-import Cards from "../../components/Posts/Card";
+import Cards from "../../components/PostCards/Card";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import swal from "sweetalert";
 import getLikedPost from "../../function/useGetLikedPost";
 import { useSelector } from "react-redux";
-import { ref } from "firebase/storage";
 
 const PostPageMain = () => {
   const [posts, setPosts] = useState<any>([]);
@@ -63,8 +62,6 @@ const PostPageMain = () => {
 
         setPosts(array);
       });
-
-      //
       // setPosts(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
     });
 

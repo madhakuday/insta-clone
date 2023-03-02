@@ -1,6 +1,6 @@
-// import { Link } from "react-router-dom";
 import "./css/style.scss";
 import { useAuth0 } from "@auth0/auth0-react";
+
 const LandingPage = () => {
   const { loginWithRedirect } = useAuth0();
   return (
@@ -34,24 +34,12 @@ const LandingPage = () => {
                     It is more about the right person in the right place at the
                     right time though.
                   </h1>
-                  {/* <p className="hero-paragraph">
-                  Our landing page template works on all devices, so you only
-                  have to set it up once, and get beautiful results forever.
-                </p> */}
+
                   <div className="hero-cta">
                     <button onClick={() => loginWithRedirect()}>
                       <span>Sign up</span>
                       <span>Sign up</span>
                     </button>
-                    {/* <p
-                      className="button button-primary"
-                      onClick={() => loginWithRedirect()}
-                    >
-                      Sign Up
-                    </p> */}
-                    {/* <a className="button" href="#">
-                    Get in touch
-                  </a> */}
                   </div>
                 </div>
                 <div className="hero-figure anime-element">
