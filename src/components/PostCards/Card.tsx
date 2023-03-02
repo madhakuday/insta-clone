@@ -104,7 +104,7 @@ const Cards: React.FC<any> = ({ data }: any) => {
             <a href={data?.data?.imageUrl} target="_blank">
               <img
                 alt="image..."
-                className="w-10/12 sm:w-full m-auto cursor-pointer"
+                className="w-full  md:w-full m-0 cursor-pointer"
                 src={data?.data?.imageUrl}
                 width="85%"
               />
@@ -197,7 +197,7 @@ const Cards: React.FC<any> = ({ data }: any) => {
             </div>
           </>,
         ]}
-        className="my-3 w-full sm:w-full m-0 	"
+        className="my-3 w-full sm:w-80 m-0	"
       >
         <p className="font-semibold  text-xs"> {data?.data?.description}</p>
       </Card>
@@ -206,3 +206,4 @@ const Cards: React.FC<any> = ({ data }: any) => {
 };
 
 export default Cards;
+
