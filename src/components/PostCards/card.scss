@@ -2,7 +2,12 @@
   animation: like 0.9s alternate !important;
   transition: all 0.5s ease-in-out;
 }
-
+.ant-card .ant-card-cover img {
+  border-radius: 0px;
+}
+.ant-layout .ant-layout-sider-trigger {
+  background: transparent !important;
+}
 @keyframes like {
   0% {
     transform: scale(1);
@@ -13,4 +18,10 @@
   100% {
     transform: scale(3);
   }
+}
+
+@media screen and (min-width: 768px) {
+  .ant-card .ant-card-cover img {
+  border-radius:8px 8px 0 0;
+}
 }

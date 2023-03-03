@@ -104,7 +104,7 @@ const Cards: React.FC<any> = ({ data }: any) => {
             <a href={data?.data?.imageUrl} target="_blank">
               <img
                 alt="image..."
-                className="w-full  md:w-full m-0 cursor-pointer"
+                className="w-full  md:w-full m-0 cursor-pointer rounded-none md:rounded-md"
                 src={data?.data?.imageUrl}
                 width="85%"
               />
